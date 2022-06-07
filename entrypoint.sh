@@ -29,6 +29,11 @@ export SHOP_ACCESS_TOKEN="$INPUT_ACCESS_TOKEN"
 [[ -n "$INPUT_LHCI_GITHUB_APP_TOKEN" ]] && export LHCI_GITHUB_APP_TOKEN="$INPUT_LHCI_GITHUB_APP_TOKEN"
 [[ -n "$INPUT_LHCI_GITHUB_TOKEN" ]]     && export LHCI_GITHUB_TOKEN="$INPUT_LHCI_GITHUB_TOKEN"
 
+# Optional, these are used to upload reports to a Lighthouse CI server
+[[ -n "$INPUT_LHCI_TARGET" ]]     && export LHCI_TARGET="$INPUT_LHCI_TARGET"
+[[ -n "$INPUT_LHCI_SERVER_URL" ]]     && export LHCI_SERVER_URL="$INPUT_LHCI_SERVER_URL"
+[[ -n "$INPUT_LHCI_SERVER_TOKEN" ]]     && export LHCI_SERVER_TOKEN="$INPUT_LHCI_SERVER_TOKEN"
+
 # Optional, these are used
 [[ -n "$INPUT_LHCI_MIN_SCORE_PERFORMANCE" ]]   && export LHCI_MIN_SCORE_PERFORMANCE="$INPUT_LHCI_MIN_SCORE_PERFORMANCE"
 [[ -n "$INPUT_LHCI_MIN_SCORE_ACCESSIBILITY" ]] && export LHCI_MIN_SCORE_ACCESSIBILITY="$INPUT_LHCI_MIN_SCORE_ACCESSIBILITY"
@@ -204,7 +209,9 @@ ci:
         - "--disable-dev-shm-usage"
         - "--disable-gpu"
   upload:
-    target: temporary-public-storage
+    target: ${LHCI_TARGET}
+    serverBaseUrl: '${LHCI_SERVER_URL}'
+    token: '${LHCI_SERVER_TOKEN}'
   assert:
     assertions:
       "categories:performance":

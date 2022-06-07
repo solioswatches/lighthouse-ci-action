@@ -40,6 +40,15 @@ inputs:
     description: 'Minimum accessibility score'
     required: false
     default: 0.9
+  lhci_target:
+    description: 'Lighthouse CI target'
+    required: false
+  lhci_server_url:
+    description: 'Lighthouse CI server url (used only if lhci_target=lhci)'
+    required: false
+  lhci_server_token:
+    description: 'Lighthouse CI server token (used only if lhci_target=lhci)'
+    required: false
   app_id:
     description: '(deprecated) Shopify private app ID'
     depreciationMessage: Shopify private apps are deprecated. Use a Custom App `access_token` instead.
