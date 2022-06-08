@@ -249,4 +249,5 @@ module.exports = async (browser) => {
 EOF
 
 step "Running Lighthouse CI"
+lhci --version
 lhci autorun
